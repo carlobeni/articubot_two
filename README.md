@@ -41,7 +41,7 @@ Agregar al final del archivo:
 
 ```bash
 source /opt/ros/$ROS_DISTRO/setup.bash
-source ~/ros2_projects/ros2_robot_ws3/install/setup.bash
+source ~/ros2_robot_ws3/install/setup.bash # verificar el path correcto
 ```
 
 
@@ -63,7 +63,7 @@ Agregar Topic Viewer
 2. Cargar topic, ejemplo: /cmd_vel
 3. Cambiar a modo pop-screen con el botor cuadrado
 
-# 4. Simulacion con RViz
+# 4. Simulacion con RViz (Opcional)
 ## 1. Abrir RViz
 ```bash
 ros2 run rviz2 rviz2
