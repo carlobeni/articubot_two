@@ -1,7 +1,50 @@
-## Robot Package Template
+# I. Crear y Registrar un Workspace en ROS 2
+## 1. Crear un nuevo workspace
 
-This is a GitHub template. You can make your own copy by clicking the green "Use this template" button.
+```bash
+mkdir -p ~/ros2_robot_ws3/src
+cd ~/ros2_robot_ws3
+```
+## 2. Clonar repositorio en src
+```bash
+git clone https://github.com/carlobeni/articubot_two.git
+```
 
-It is recommended that you keep the repo/package name the same, but if you do change it, ensure you do a "Find all" using your IDE (or the built-in GitHub IDE by hitting the `.` key) and rename all instances of `my_bot` to whatever your project's name is.
+## 3. Compilacion automatica del workspace con colcon
 
-Note that each directory currently has at least one file in it to ensure that git tracks the files (and, consequently, that a fresh clone has direcctories present for CMake to find). These example files can be removed if required (and the directories can be removed if `CMakeLists.txt` is adjusted accordingly).
+```bash
+colcon build --symlink-install
+```
+
+## 4. Cargar el workspace en la terminal actual
+
+```bash
+source install/setup.bash
+```
+
+## 5. Registrar el workspace en el archivo `.bashrc` (Alternativo al paso 4 con efecto permanente)
+
+Abrir el archivo:
+
+```bash
+code ~/.bashrc
+```
+
+Agregar al final del archivo:
+
+```bash
+source /opt/ros/$ROS_DISTRO/setup.bash
+source ~/ros2_projects/ros2_robot_ws3/install/setup.bash
+```
+
+
+# 2. Simulacion con Gazebo
+Terminal 1: Correr nodo de visualizacion de Gazebo (luego cerrar)
+```bash
+ros2 launch ros_gz_sim gz_sim.launch.py
+```
+
+Terminal 2: Lanzar launch de nodos de simulacion (Crea un nuevo world vacio)
+```bash
+ros2 launch articubot_one launch_sim.launch.py
+```
