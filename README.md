@@ -10,7 +10,7 @@ cd ~/ros2_robot_ws3
 git clone https://github.com/carlobeni/articubot_two.git
 ```
 
-## 3. Agragar twist_stamper
+## 3. Agregar twist_stamper y twist_mux
 ```bash
 sudo apt update # actualizacion de dependencias
 sudo apt install ros-rolling-twist-stamper
@@ -51,7 +51,33 @@ Terminal 1: Correr empty world
 ros2 launch articubot_two launch_sim.launch.py
 ```
 
-Terminal 2: Lanzar launch de nodos de simulacion (Crea un nuevo world vacio)
+Terminal 2: Cargar world preguardado, ejemplo con obstacles.world
 ```bash
-ros2 launch articubot_one launch_sim.launch.py
+ros2 launch articubot_two launch_sim.launch.py world:=./src/articubot_two/worlds/obstacles.world
+```
+# 3.Lectura de topics en Gazebo
+## 1. Ver lista de Topics de Gazebo
+Add Topic Viewer
+## 2. Lectura de Messages de /topic_name
+1. Agregar Topic Echo
+2. Cargar topic, ejemplo: /cmd_vel
+3. Cambiar a modo pop-screen con el botor cuadrado
+
+# 4. Simulacion con RViz
+
+# 5. ros2_control
+## 1. Instalar ros2_control
+```bash
+sudo apt update
+sudo apt install ros-rolling-ros2-control ros-rolling-ros2-controllers # para implementacion real
+sudo apt install ros-rolling-gz-ros2-control # para simulacion
+```
+## 2. Veriifcar que los plugins de ros2_control esten activos
+```bash
+ros2 control list_controllers
+```
+
+## 3. Control con teleop_twist_keyboard con /cmd_vel:=/diff_cont/cmd_vel_unstamped
+```bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
 ```
