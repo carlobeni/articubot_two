@@ -29,7 +29,7 @@ colcon build --symlink-install
 source install/setup.bash
 ```
 
-## 6. Registrar el workspace en el archivo `.bashrc` (Alternativo al paso 4 con efecto permanente)
+## 6. Registrar el workspace en el archivo `.bashrc` (Alternativo al paso 5 con efecto permanente)
 
 Abrir el archivo:
 
@@ -57,13 +57,26 @@ ros2 launch articubot_two launch_sim.launch.py world:=./src/articubot_two/worlds
 ```
 # 3.Lectura de topics en Gazebo
 ## 1. Ver lista de Topics de Gazebo
-Add Topic Viewer
+Agregar Topic Viewer
 ## 2. Lectura de Messages de /topic_name
 1. Agregar Topic Echo
 2. Cargar topic, ejemplo: /cmd_vel
 3. Cambiar a modo pop-screen con el botor cuadrado
 
 # 4. Simulacion con RViz
+## 1. Abrir RViz
+```bash
+ros2 run rviz2 rviz2
+``` 
+## 2. Correr launch
+```bash
+ros2 launch articubot_two launch_sim.launch.py
+```
+## 3. Agregar las fuentes de RViz
+1. En Global Options, agregar las fuentes de RViz
+2. Agregar TF
+3. Agregar Robot Model con Topic: /robot_description
+
 
 # 5. ros2_control
 ## 1. Instalar ros2_control
@@ -72,6 +85,8 @@ sudo apt update
 sudo apt install ros-rolling-ros2-control ros-rolling-ros2-controllers # para implementacion real
 sudo apt install ros-rolling-gz-ros2-control # para simulacion
 ```
+OBS: Cambiar rolling por humble, iron, etc segun versión de ROS
+
 ## 2. Veriifcar que los plugins de ros2_control esten activos
 ```bash
 ros2 control list_controllers
