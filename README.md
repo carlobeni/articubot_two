@@ -1,4 +1,4 @@
-# I. Crear y Registrar un Workspace en ROS 2
+# 1. Crear y Registrar un Workspace en ROS 2
 ## 1. Crear un nuevo workspace
 
 ```bash
@@ -73,7 +73,7 @@ ros2 run rviz2 rviz2
 ros2 launch articubot_two launch_sim.launch.py
 ```
 ## 3. Agregar las fuentes de RViz
-1. En Global Options, agregar las fuentes de RViz
+1. En Global Options, agregar las fuentes de RViz con Fixed Frame: /base_link
 2. Agregar TF
 3. Agregar Robot Model con Topic: /robot_description
 
@@ -96,3 +96,14 @@ ros2 control list_controllers
 ```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
 ```
+
+# 6. Camara
+Topics  importantes:
+1. /my_camera/image_raw: Imagen en bruto de la camara publicada por el nodo del driver\
+Type: sensor_msgs/msg/Image
+
+2. /my_camera/image_raw/compressed: Imagen comprimida preprocesada por image_transport library\
+Type: sensor_msgs/CompressedImage
+
+3. /my_camera/camera_info: Metadatos de la camara publicados por el nodo del driver\
+Type: sensor_msgs/msg/CameraInfo
