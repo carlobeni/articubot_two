@@ -10,19 +10,26 @@ cd ~/ros2_robot_ws3
 git clone https://github.com/carlobeni/articubot_two.git
 ```
 
-## 3. Compilacion automatica del workspace con colcon
+## 3. Agragar twist_stamper
+```bash
+sudo apt update # actualizacion de dependencias
+sudo apt install ros-rolling-twist-stamper
+sudo apt install ros-rolling-twist-mux
+```
+OBS: Cambiar rolling por humble, iron, etc segun versión de ROS
+## 4. Compilacion automatica del workspace con colcon
 
 ```bash
 colcon build --symlink-install
 ```
 
-## 4. Cargar el workspace en la terminal actual
+## 5. Cargar el workspace en la terminal actual
 
 ```bash
 source install/setup.bash
 ```
 
-## 5. Registrar el workspace en el archivo `.bashrc` (Alternativo al paso 4 con efecto permanente)
+## 6. Registrar el workspace en el archivo `.bashrc` (Alternativo al paso 4 con efecto permanente)
 
 Abrir el archivo:
 
@@ -39,9 +46,9 @@ source ~/ros2_projects/ros2_robot_ws3/install/setup.bash
 
 
 # 2. Simulacion con Gazebo
-Terminal 1: Correr nodo de visualizacion de Gazebo (luego cerrar)
+Terminal 1: Correr empty world
 ```bash
-ros2 launch ros_gz_sim gz_sim.launch.py
+ros2 launch articubot_two launch_sim.launch.py
 ```
 
 Terminal 2: Lanzar launch de nodos de simulacion (Crea un nuevo world vacio)
