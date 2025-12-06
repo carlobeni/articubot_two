@@ -99,11 +99,66 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/di
 
 # 6. Camara
 Topics  importantes:
-1. /my_camera/image_raw: Imagen en bruto de la camara publicada por el nodo del driver\
+1. /camera/image_raw: Imagen en bruto de la camara publicada por el nodo del driver\
 Type: sensor_msgs/msg/Image
 
-2. /my_camera/image_raw/compressed: Imagen comprimida preprocesada por image_transport library\
+2. /camera/image_raw/compressed: Imagen comprimida preprocesada por image_transport library\
 Type: sensor_msgs/CompressedImage
 
-3. /my_camera/camera_info: Metadatos de la camara publicados por el nodo del driver\
+3. /camera/camera_info: Metadatos de la camara publicados por el nodo del driver\
 Type: sensor_msgs/msg/CameraInfo
+
+## 1. Visualizar /image_raw en Gazebo
+Agregar Image Display con Topic: /camera/image_raw
+
+OBS: tambien puede visualizarse en RViz agregarndo con 
+- Frame Fix: odom
+- Image Display con Topic: /camera/image_raw
+
+## 2. Visualizar /image_raw/compressed
+Instalar image_transport_plugins y rqt_image_view
+```bash
+sudo apt install ros-rolling-image-transport-plugins # para compresion y descompresion de imagen
+sudo apt install ros-rolling-rqt-image-view # para visualizacion de imagen
+```
+OBS: Cambiar foxy por humble, iron, etc segun versión de ROS
+
+Visualizar imagen comprimida/descomprimida
+```bash
+ros2 run rqt_image_view rqt_image_view
+```
+Visualizar lista de tipos de topics de imagen
+```bash
+ros2 run image_transport list_transports
+```
+Republicar un image transport de un tipo a otro (util para transmision de imagen comprimida)
+
+Ejemplo de compressed a uncompressed (No funciona)
+```bash
+ros2 run image_transport republish compressed raw --ros-args -r in/compressed:=/camera/image_raw/compressed -r out:=/camera/image_raw/uncompressed
+```
+## 3. Prueba de camara en Pi5
+OBS: Debe clonarse el repo siguiendo esta documentacion de todos los pasos anteriores
+
+Instalar dependecias para usar la piCam
+```bash
+sudo apt install libraspberrypi-bin v4l-utils 
+sudo ros-rolling-v4l2-camera ros-foxy-image-transport-plugins
+```
+Verificar exitencia video en el group
+```bash
+groups
+```
+OBS: Si no aparece video, ejecutar el siguiente comando
+```bash
+sudo usermod -a -G video reboot
+```
+
+Verificar que la camara este conectada
+```bash
+vcgencmd get_camera
+```
+Visualizar camara
+```bash
+raspistill -k
+```
